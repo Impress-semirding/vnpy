@@ -99,7 +99,7 @@
                                 <div class="el-col el-col-18">
                                     <el-button class="el-col el-col-24" type="primary" @click="onSubmit" v-loading="loading.order">发单</el-button>
                                     <el-button class="el-col el-col-24" @click="dAllOrder">全撤</el-button>
-                                    <el-button class="el-col el-col-24" v-loading="loading.token" @click="gGateway">连接CTP</el-button>
+                                    <el-button class="el-col el-col-24" v-loading="loading.token" @click="gGateway">连接BINANCE</el-button>
                                 </div>
                             </el-row>
                             <el-row class="body-left__connection">
@@ -912,9 +912,9 @@ new Vue({
         },
         gGateway() {
             const that = this;
-            axios.post(host + '/gateway', {
+            axios.post(host + 'gateway', {
                     token: this.config.token,
-                    gatewayName: 'CTP'
+                    gatewayName: 'BINANCE'
                 })
                 .then(function(res) {
                     that.config.gateway = true;

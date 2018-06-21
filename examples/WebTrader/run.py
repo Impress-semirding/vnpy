@@ -36,33 +36,33 @@ if __name__ == '__main__':
         
         currentTime = dt.time()
         
-        if currentTime >= START_TIME or currentTime <= CLOSE_TIME:
-            le.info(u'当前处于交易时间段')
-            
-            if not pTrading:
-                pTrading = Process(target=runTradingServer)
-                pTrading.start()
-                le.info(u'启动交易服务器进程')
-                
-            if not pWeb:
-                pWeb = Process(target=runWebServer)
-                pWeb.start()
-                le.info(u'启动WEB服务器进程')
+        # if currentTime >= START_TIME or currentTime <= CLOSE_TIME:
+        le.info(u'当前处于交易时间段')
         
-        else:
-            le.info(u'当前处于非交易时间段')
+        if not pTrading:
+            pTrading = Process(target=runTradingServer)
+            pTrading.start()
+            le.info(u'启动交易服务器进程')
             
-            if pTrading:
-                pTrading.terminate()
-                pTrading.join()
-                pTrading = None
-                le.info(u'关闭交易服务器进程')
+        if not pWeb:
+            pWeb = Process(target=runWebServer)
+            pWeb.start()
+            le.info(u'启动WEB服务器进程')
+        
+        # else:
+        #     le.info(u'当前处于非交易时间段')
             
-            if pWeb:
-                pWeb.terminate()
-                pWeb.join()
-                pWeb = None
-                le.info(u'关闭WEB服务器进程')
+        #     if pTrading:
+        #         pTrading.terminate()
+        #         pTrading.join()
+        #         pTrading = None
+        #         le.info(u'关闭交易服务器进程')
+            
+        #     if pWeb:
+        #         pWeb.terminate()
+        #         pWeb.join()
+        #         pWeb = None
+        #         le.info(u'关闭WEB服务器进程')
         
         sleep(60)
         

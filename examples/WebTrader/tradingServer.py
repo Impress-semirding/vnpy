@@ -16,10 +16,13 @@ from vnpy.event import EventEngine2
 from vnpy.trader.vtEngine import MainEngine, LogEngine
 
 # 加载底层接口
-from vnpy.trader.gateway import ctpGateway
+# from vnpy.trader.gateway import ctpGateway
+from vnpy.trader.gateway import binanceGateway
 
 # 加载上层应用
-from vnpy.trader.app import ctaStrategy, rpcService
+# from vnpy.trader.app import ctaStrategy, rpcService
+from vnpy.trader.app import (riskManager, ctaStrategy, spreadTrading, rpcService)
+
 
 
 #----------------------------------------------------------------------
@@ -49,10 +52,13 @@ def main():
         signal.signal(sig, shutdown)
     
     # 添加交易接口
-    me.addGateway(ctpGateway)
+    me.addGateway(binanceGateway)
     
     # 添加上层应用
+    # me.addApp(riskManager)
     me.addApp(ctaStrategy)
+    # me.addApp(spreadTrading)
+    # me.addApp(ctaStrategy)
     me.addApp(rpcService)
     
     le.info(u'主引擎创建成功')

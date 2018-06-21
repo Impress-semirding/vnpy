@@ -1,5 +1,5 @@
 {
-	"apiKey": "",
-	"secretKey": "",
-	"symbols": ["BTCUSDT", "ETHUSDT", "ETHBTC"]
+	"apiKey": "4pYrKcwH0euFSCXbpd9E1II0ItsN08vCdepB5BqEataJFUMaU2clx7KcivGT3RYX",
+	"secretKey": "q7hnv6UwpDcHhCG2FUQvwgHKTuQam9bXzDnDL53djvjhfaciC1TipwrJMUfcltGh",
+	"symbols": ["BTCUSDT", "ETHUSDT", "ETHBTC", "EOSUSDT", "OKBUSDT"]
 }

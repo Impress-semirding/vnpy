@@ -8,7 +8,8 @@ from datetime import datetime, time
 from vnpy.event import EventEngine2
 from vnpy.trader.vtEvent import EVENT_LOG, EVENT_ERROR
 from vnpy.trader.vtEngine import MainEngine, LogEngine
-from vnpy.trader.gateway import ctpGateway
+# from vnpy.trader.gateway import ctpGateway
+from vnpy.trader.gateway import binanceGateway
 from vnpy.trader.app import dataRecorder
 
 
@@ -36,7 +37,7 @@ def runChildProcess():
     le.info(u'事件引擎创建成功')
     
     me = MainEngine(ee)
-    me.addGateway(ctpGateway)
+    me.addGateway(binanceGateway)
     me.addApp(dataRecorder)
     le.info(u'主引擎创建成功')
 
@@ -44,7 +45,7 @@ def runChildProcess():
     ee.register(EVENT_ERROR, processErrorEvent)
     le.info(u'注册日志事件监听')
 
-    me.connect('CTP')
+    me.connect('BINANCE')
     le.info(u'连接CTP接口')
 
     while True:

@@ -95,7 +95,7 @@ class Gateway(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('gatewayName')
         self.parser.add_argument('token')
-        
+        print('=======================gateway=====================')
         super(Gateway, self).__init__()
     
     #----------------------------------------------------------------------
@@ -113,6 +113,7 @@ class Gateway(Resource):
     #----------------------------------------------------------------------
     def post(self):
         """连接"""
+        print('sdewew')
         args = self.parser.parse_args()
         token = args['token']
         if token != TOKEN:
@@ -276,11 +277,13 @@ class Account(Resource):
         args = self.parser.parse_args()
         token = args['token']
         if token != TOKEN:
+            print('token != TOKEN=======')
             return {'result_code':'error','message':'token error'}
-        
-        data = me.getAllAccounts()
-        l = [o.__dict__ for o in data]
-        return {'result_code':'success','data':l}        
+        print('pre getall=======')
+        # data = me.getAllAccounts()
+        print('me.getAllAccounts() != me.getAllAccounts()=======')
+        # l = [o.__dict__ for o in data]
+        return {'result_code':'success','data':''}        
 
 
 ########################################################################

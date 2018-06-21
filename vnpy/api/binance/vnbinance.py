@@ -538,7 +538,10 @@ class BinanceApi(object):
         """"""
         try:
             self.dataStreamWs = create_connection(self.dataStreamUrl,
-                                                  sslopt={'cert_reqs': ssl.CERT_NONE})
+                                                  sslopt={'cert_reqs': ssl.CERT_NONE},
+                                                  http_proxy_host='127.0.0.1',
+                                                  http_proxy_port='1087'
+                                                  )
             return True
         except:
             msg = traceback.format_exc()

@@ -110,7 +110,7 @@ class MainEngine(object):
     def connect(self, gatewayName):
         """连接特定名称的接口"""
         gateway = self.getGateway(gatewayName)
-        
+        print(gateway)
         if gateway:
             gateway.connect()
             
