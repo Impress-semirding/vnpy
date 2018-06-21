@@ -60,10 +60,10 @@ def runParentProcess():
     le.addConsoleHandler()
     le.info(u'启动行情记录守护父进程')
     
-    DAY_START = time(8, 57)         # 日盘启动和停止时间
-    DAY_END = time(15, 18)
-    NIGHT_START = time(20, 57)      # 夜盘启动和停止时间
-    NIGHT_END = time(2, 33)
+    DAY_START = time(0, 1)         # 日盘启动和停止时间
+    DAY_END = time(12, 59)
+    NIGHT_START = time(13, 01)      # 夜盘启动和停止时间
+    NIGHT_END = time(23, 59)
     
     p = None        # 子进程句柄
 
@@ -81,7 +81,7 @@ def runParentProcess():
         if ((datetime.today().weekday() == 6) or 
             (datetime.today().weekday() == 5 and currentTime > NIGHT_END) or 
             (datetime.today().weekday() == 0 and currentTime < DAY_START)):
-            recording = False
+            recording = True
 
         # 记录时间则需要启动子进程
         if recording and p is None:
