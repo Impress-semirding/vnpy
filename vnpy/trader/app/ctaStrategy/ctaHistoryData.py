@@ -93,14 +93,23 @@ def loadMcCsv(fileName, dbName, symbol):
         bar.high = float(d['High'])
         bar.low = float(d['Low'])
         bar.close = float(d['Close'])
-        bar.date = datetime.strptime(d['Date'], '%Y-%m-%d').strftime('%Y%m%d')
-        bar.time = d['Time']
-        bar.datetime = datetime.strptime(bar.date + ' ' + bar.time, '%Y%m%d %H:%M:%S')
+        tmb = d['Time']
+        year = tmb.split(' ')[0];
+        days = tmb.split(' ')[1].split('+')[0]
+        bar.date = datetime.strptime(year, '%Y-%m-%d').strftime('%Y%m%d')
+        # bar.time = d['Time']
+        bar.datetime = datetime.strptime(bar.date + ' ' + days, '%Y%m%d %H:%M:%S')
+        # bar.date = datetime.strptime(d['Date'], '%Y-%m-%d').strftime('%Y%m%d')
+        # bar.time = d['Time']
+        # print(tmb.split(' ')[1])
+        bar.time = tmb.split(' ')[1].split('+')[0]
+        # bar.datetime = datetime.strptime(bar.date + ' ' + bar.time, '%Y%m%d %H:%M:%S')
         bar.volume = d['TotalVolume']
-
-        flt = {'datetime': bar.datetime}
-        collection.update_one(flt, {'$set':bar.__dict__}, upsert=True)  
-        print(bar.date, bar.time)
+        if (bar.volume == None or bar.volume == '' or bar.close == '' or bar.close == None):
+            print('12121212121')
+        else:
+            flt = {'datetime': bar.datetime}
+            collection.update_one(flt, {'$set':bar.__dict__}, upsert=True)  
     
     print(u'插入完毕，耗时：%s' % (time()-start))
 

@@ -434,7 +434,9 @@ class BarGenerator(object):
         # 通用部分
         self.xminBar.close = bar.close        
         self.xminBar.openInterest = bar.openInterest
-        self.xminBar.volume += int(bar.volume)                
+        print('dshdashdkshdkshk')
+        print(bar.volume)
+        self.xminBar.volume += float(bar.volume)                
             
         # X分钟已经走完
         if not (bar.datetime.minute + 1) % self.xmin:   # 可以用X整除

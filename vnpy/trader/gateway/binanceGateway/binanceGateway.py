@@ -36,7 +36,9 @@ priceTypeMap[PRICETYPE_LIMITPRICE] = 'LIMIT'
 priceTypeMap[PRICETYPE_MARKETPRICE] = 'MARKET'
 
 
+import sys
 
+print(sys.path)
 
 #----------------------------------------------------------------------
 def print_dict(d):
@@ -185,7 +187,8 @@ class GatewayApi(BinanceApi):
         self.init(apiKey, secretKey)
         self.start()
         self.writeLog(u'交易API启动成功')
-        
+        print('------------------sysbol---------------------')
+        print(symbols)
         l = []
         for symbol in symbols:
             symbol = symbol.lower()

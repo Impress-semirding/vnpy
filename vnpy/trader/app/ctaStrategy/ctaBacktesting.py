@@ -199,7 +199,9 @@ class BacktestingEngine(object):
 
         # 载入初始化需要用的数据
         flt = {'datetime':{'$gte':self.dataStartDate,
-                           '$lt':self.strategyStartDate}}        
+                           '$lt':self.strategyStartDate}}
+        print('initCursor = collection.find(flt)')
+        print(flt)        
         initCursor = collection.find(flt).sort('datetime')
         
         # 将数据从查询指针中读取出，并生成列表
@@ -690,6 +692,8 @@ class BacktestingEngine(object):
         
         # 到最后交易日尚未平仓的交易，则以最后价格平仓
         if self.mode == self.BAR_MODE:
+            print('--------------self-bar-------------------')
+            print(self)
             endPrice = self.bar.close
         else:
             endPrice = self.tick.lastPrice
@@ -791,6 +795,7 @@ class BacktestingEngine(object):
     #----------------------------------------------------------------------
     def showBacktestingResult(self):
         """显示回测结果"""
+        print(self.bar)
         d = self.calculateBacktestingResult()
         
         # 输出
