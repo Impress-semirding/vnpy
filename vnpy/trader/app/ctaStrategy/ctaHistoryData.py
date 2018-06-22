@@ -95,7 +95,13 @@ def loadMcCsv(fileName, dbName, symbol):
         bar.close = float(d['Close'])
         tmb = d['Time']
         year = tmb.split(' ')[0];
-        days = tmb.split(' ')[1].split('+')[0]
+        days = tmb.split(' ')[1]
+        if '.' in days:
+            print('-----------------包含.-------------------')
+            days = days.split('.')[0]
+        else:
+            days = days.split('+')[0]
+
         bar.date = datetime.strptime(year, '%Y-%m-%d').strftime('%Y%m%d')
         # bar.time = d['Time']
         bar.datetime = datetime.strptime(bar.date + ' ' + days, '%Y%m%d %H:%M:%S')
@@ -106,7 +112,7 @@ def loadMcCsv(fileName, dbName, symbol):
         # bar.datetime = datetime.strptime(bar.date + ' ' + bar.time, '%Y%m%d %H:%M:%S')
         bar.volume = d['TotalVolume']
         if (bar.volume == None or bar.volume == '' or bar.close == '' or bar.close == None):
-            print('12121212121')
+            tm = 1
         else:
             flt = {'datetime': bar.datetime}
             collection.update_one(flt, {'$set':bar.__dict__}, upsert=True)  
