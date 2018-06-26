@@ -815,7 +815,7 @@ class BacktestingEngine(object):
         self.output(u'盈亏比：\t%s' %formatNumber(d['profitLossRatio']))
     
         # 绘图
-        fig = plt.figure(figsize=(10, 16))
+        fig = plt.figure(figsize=(10, 10))
         
         pCapital = plt.subplot(4, 1, 1)
         pCapital.set_ylabel("capital")
