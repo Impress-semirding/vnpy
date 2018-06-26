@@ -111,11 +111,10 @@ def loadMcCsv(fileName, dbName, symbol):
         bar.time = tmb.split(' ')[1].split('+')[0]
         # bar.datetime = datetime.strptime(bar.date + ' ' + bar.time, '%Y%m%d %H:%M:%S')
         bar.volume = d['TotalVolume']
-        if (bar.volume == None or bar.volume == '' or bar.close == '' or bar.close == None):
-            tm = 1
-        else:
-            flt = {'datetime': bar.datetime}
-            collection.update_one(flt, {'$set':bar.__dict__}, upsert=True)  
+        if (bar.volume == None or bar.volume == ''):
+            bar.volume = 0
+        flt = {'datetime': bar.datetime}
+        collection.update_one(flt, {'$set':bar.__dict__}, upsert=True)  
     
     print(u'插入完毕，耗时：%s' % (time()-start))
 

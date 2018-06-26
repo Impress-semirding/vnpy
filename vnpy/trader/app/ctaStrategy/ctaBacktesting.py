@@ -63,7 +63,7 @@ class BacktestingEngine(object):
         self.initDays = 0        
         self.endDate = ''
 
-        self.capital = 1000000      # 回测时的起始本金（默认100万）
+        self.capital = 10000      # 回测时的起始本金（默认100万）
         self.slippage = 0           # 回测时假设的滑点
         self.rate = 0               # 回测时假设的佣金比例（适用于百分比佣金）
         self.size = 1               # 合约大小，默认为1    
@@ -200,7 +200,7 @@ class BacktestingEngine(object):
         # 载入初始化需要用的数据
         flt = {'datetime':{'$gte':self.dataStartDate,
                            '$lt':self.strategyStartDate}}
-        print('initCursor = collection.find(flt)')
+        print('init data')
         print(flt)        
         initCursor = collection.find(flt).sort('datetime')
         
@@ -218,7 +218,8 @@ class BacktestingEngine(object):
             flt = {'datetime':{'$gte':self.strategyStartDate,
                                '$lte':self.dataEndDate}}  
         self.dbCursor = collection.find(flt).sort('datetime')
-        
+        print('回测 data')
+        print(flt)
         self.output(u'载入完成，数据量：%s' %(initCursor.count() + self.dbCursor.count()))
         
     #----------------------------------------------------------------------
@@ -692,8 +693,6 @@ class BacktestingEngine(object):
         
         # 到最后交易日尚未平仓的交易，则以最后价格平仓
         if self.mode == self.BAR_MODE:
-            print('--------------self-bar-------------------')
-            print(self)
             endPrice = self.bar.close
         else:
             endPrice = self.tick.lastPrice
@@ -795,7 +794,6 @@ class BacktestingEngine(object):
     #----------------------------------------------------------------------
     def showBacktestingResult(self):
         """显示回测结果"""
-        print(self.bar)
         d = self.calculateBacktestingResult()
         
         # 输出
