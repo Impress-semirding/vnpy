@@ -95,6 +95,7 @@ class BinanceApi(object):
     #----------------------------------------------------------------------
     def request(self, method, path, params=None, signed=False, stream=False):
         """"""
+        proxies = { 'http': '127.0.0.1:1087', 'https': '127.0.0.1:1087' }
         if not signed:
             url = REST_ENDPOINT + path
             headers = {}            
@@ -121,7 +122,7 @@ class BinanceApi(object):
             headers = self.headers
         
         try:
-            resp = requests.request(method, url, params=params, headers=headers)
+            resp = requests.request(method, url, proxies=proxies, params=params, headers=headers)
             
             if resp.status_code == 200:
                 return True, resp.json()
